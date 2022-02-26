@@ -1,10 +1,12 @@
 package Main;
 
+import javax.swing.plaf.basic.BasicArrowButton;
+
 public class Veiculo{
-    protected int Id = 0;
     private String Tipo;
     private String Marca;
-    private double Price;
+    private double Preco;
+    private int Quantidade;
 
     protected String[] Automoveis = new String[]{
             "Carro",
@@ -15,21 +17,25 @@ public class Veiculo{
     };
 
     Veiculo(){}
-    Veiculo(String Automovel, String Marca, double Price){
-        this.Id++;
-        this.Marca = Marca;
-        this.Price = Price;
-        validacaoTipo(Automovel);
+    Veiculo(String automovel, String marca, double preco, int quantidade){
+        this.Tipo = automovel;
+        this.Marca = marca;
+        this.Preco = preco;
+        this.Quantidade = quantidade;
     }
 
-    private String validacaoTipo(String Validacao){
-        for(String Tipo : Automoveis) {
-            if (Tipo.equals(Validacao)) {
-                return this.Tipo = Tipo;
-            }
-        }
-        System.out.println("Marca não encontrada!");
-        return this.Tipo;
+    void ImprimirAutomoveis(){
+        for (int i = 0; i < Automoveis.length; i++) System.out.println((i+1) + " - " + Automoveis[i]);
+    }
+
+    String setAutomovel(int index){
+        --index;
+        if (index < Automoveis.length && index > -1) return this.Tipo = Automoveis[index];
+        return this.Tipo = "Falha ao encontrar o tipo";
+    }
+
+    public void printAutomoveis(){
+        for (int i = 0; i < Automoveis.length; i++) System.out.println(String.format((i+1) + Automoveis[i]));
     }
 
     void imprimir(){
@@ -37,7 +43,17 @@ public class Veiculo{
         System.out.println();
         System.out.printf("Marca: %s", this.Marca);
         System.out.println();
-        System.out.printf("Preço: %.2f", this.Price);
+        System.out.printf("Preço: %.2f", this.Preco);
         System.out.println();
     }
+
+    void EditarProduto(String automovelNovo, String marcaNova, double precoNovo, int quantidadeNova){
+        this.Marca = marcaNova;
+        this.Tipo = automovelNovo;
+        this.Preco = precoNovo;
+        this.Quantidade = quantidadeNova;
+    }
+
+    @Override
+    public String toString() {return "Tipo Automovel: " + this.Tipo + " | " + "Marca: " + this.Marca + " | " + "Preço: " + this.Preco + " | " + "Quantidade: " + this.Quantidade; }
 }
