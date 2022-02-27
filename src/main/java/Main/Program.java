@@ -4,14 +4,53 @@ import com.sun.security.jgss.GSSUtil;
 
 import java.util.*;
 
-public class Program {
+
+public class Program extends Admin{
 
     static List<Veiculo> Estoque = new ArrayList<>();
+    public static List<Usuario> Contas = new ArrayList<>();
+    public static Usuario user = new Usuario();
     static Scanner scan = new Scanner(System.in);
     static String nomePessoa;
 
     public static void main(String[] args) {
         System.out.println("$$$$$$ Venda de Automovel $$$$$$");
+
+        int escolha;
+        do{
+            escolha = loginRegistro();
+            switch(escolha){
+                case 0:
+                    System.out.println("Erro ao realizar o login");
+                    break;
+                case 1:
+
+                case 2:
+                    String continuar;
+                    AdminAcess();
+                    break;
+                default: break;
+            }
+        }while(true);
+    }
+
+    static int loginRegistro(){
+        do{
+            System.out.println("1 - Logar");
+            System.out.println("2 - Registrar");
+            System.out.println("3 - Fechar Programa");
+            int escolha = scan.nextInt();
+            int login = 0;
+            switch (escolha) {
+                case 1: return login();
+                case 2: registro(); break;
+                default:
+                    return 3;
+            }
+        }while(true);
+    }
+
+    static void AdminAcess(){
         String select;
         do{
             Inicio();
@@ -32,6 +71,9 @@ public class Program {
             }
         }while(!(select.toLowerCase().equals("x")));
     }
+    static void cliente(){
+
+    }
 
     static void Inicio(){
         System.out.println();
@@ -43,57 +85,25 @@ public class Program {
         System.out.println("x - Fechar o Programa");
         System.out.println();
     }
-
-    static void VisualizarItens(){
-        int Id = 0;
-        for (Veiculo x: Estoque) {
-            System.out.print(Id + " - ");
-            Id++;
-            System.out.println(x);
-        }
+    static void registro(){
+        System.out.println("Crie sua conta");
+        System.out.println("Digite seu login: ");
+        String login = scan.next();
+        System.out.println("Digite sua senha: ");
+        String senha = scan.next();
+        Contas.add(new Usuario(login, senha));
     }
-    static void AdicionarVeiculo(){
-        String tipo = TiposAutomovel();
-        System.out.println("Marca: ");
-        String marca = scan.next();
-        System.out.println("Preço: ");
-        double preco = scan.nextDouble();
-        System.out.println("Quantidade estoque: ");
-        int quantidade = scan.nextInt();
-        Estoque.add(new Veiculo(tipo, marca, preco, quantidade));
-    }
-    static String TiposAutomovel(){
-        ImprimirVeiculos();
-        System.out.println("Digite o id do tipo do veiculo: ");
-        return ImprimirVeiculos().setAutomovel(scan.nextInt());
-    }
-    static Veiculo ImprimirVeiculos(){
-        Veiculo automoveis = new Veiculo();
-        System.out.println();
-        automoveis.ImprimirAutomoveis();
-        System.out.println();
-        return automoveis;
-    }
-    static void EditarProduto(){
-        System.out.println("Digite a Id do produto a ser Editado: ");
-        int index = scan.nextInt();
-        if(!Estoque.isEmpty()){
-            if(index < Estoque.size() && index > -1){
-                System.out.println();
-                String tipo = TiposAutomovel();
-                System.out.println("Marca: ");
-                String marca = scan.next();
-                System.out.println("Preço: ");
-                double preco = scan.nextDouble();
-                System.out.println("Quantidade estoque: ");
-                int quantidade = scan.nextInt();
+    static int login(){
+        System.out.println("Digite seu login: ");
+        String login = scan.next();
+        System.out.println("Digite sua senha: ");
+        String senha = scan.next();
+        for (int i = 0; i < Contas.size(); i++) {
+            if ((Contas.get(i).getUsuario().equals(login) && Contas.get(i).getSenha().equals(senha))){
+                return Contas.get(i).nivelAcesso(login, senha);
             }
-            else System.out.println("Não tem esse item na lista\n");
         }
-        else System.out.println("Sem produtos para alterar\n");
-
-
-
-
+        if(login.equals("admin") && senha.equals("admin")) return user.nivelAcesso(login, senha);
+        return 0;
     }
 }
