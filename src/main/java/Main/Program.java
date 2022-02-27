@@ -137,7 +137,7 @@ public class Program{
         System.out.println("2 - Cadastrar produto");
         System.out.println("3 - Editar produto");
         System.out.println("4 - Tipos de automovel");
-        System.out.println("x - Fechar o Programa");
+        System.out.println("x - Desconectar");
     }
     static void InicioCliente(){
         System.out.println("\n=================");
@@ -145,7 +145,7 @@ public class Program{
         System.out.println("1 - Visualizar os itens a venda");
         System.out.println("2 - Realizar uma compra");
         System.out.println("3 - Tipos de automovel");
-        System.out.println("x - Fechar o Programa");
+        System.out.println("x - Desconectar");
     }
 
 }

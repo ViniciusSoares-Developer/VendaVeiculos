@@ -1,0 +1,10 @@
+Programa criado por: Vinícius Soares Domingos da Silva
+
+Linguagem: Java
+
+Projeto feito para treinar Herança, Programação orientada a objeto(POO), Listas e Arrays
+
+Para executar basta abrir o arquivo com nome Venda de Veiculo
+
+GitHub: https://github.com/ViniciusSoares-Developer
+LinkedIn: https://www.linkedin.com/in/vinicius-soares-jv/
